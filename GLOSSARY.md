@@ -27,3 +27,19 @@ _Avoid_: Target, manifest, link
 **Named command**:
 Một dòng lệnh shell có tên khai báo trong Setup, chạy với secret của Config được inject vào môi trường.
 _Avoid_: Action, script, task
+
+**Machine**:
+Một máy tin cậy chạy kith, có cặp khóa riêng; là chủ thể được cấp quyền và là recipient của Config.
+_Avoid_: Device, node, peer
+
+**Member**:
+Một người, dùng làm nhãn gom các Machine của họ; không có khóa riêng.
+_Avoid_: User, account
+
+**Grant**:
+Quyền của một Machine với một Config, nghĩa là Config được mã hóa tới Machine đó; Grant một Branch config bao gồm quyền đọc Config gốc của nó.
+_Avoid_: Share, access, permission
+
+**Admin**:
+Vai trò của một Member trong một Project, cho phép ký các thay đổi về thành viên và Grant của Project đó.
+_Avoid_: Owner, manager
