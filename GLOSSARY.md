@@ -37,9 +37,17 @@ Một người, dùng làm nhãn gom các Machine của họ; không có khóa r
 _Avoid_: User, account
 
 **Grant**:
-Quyền của một Machine với một Config, nghĩa là Config được mã hóa tới Machine đó; Grant một Branch config bao gồm quyền đọc Config gốc của nó.
+Quyền đọc và ghi của một Machine với một Config, nghĩa là Config được mã hóa tới Machine đó; Grant một Branch config bao gồm quyền đọc Config gốc của nó.
 _Avoid_: Share, access, permission
 
 **Admin**:
 Vai trò của một Member trong một Project, cho phép ký các thay đổi về thành viên và Grant của Project đó.
 _Avoid_: Owner, manager
+
+**Change**:
+Một thay đổi có chữ ký của một Machine, hoặc trên các key của một Config, hoặc trên thành viên và Grant của một Project; là đơn vị được nhân bản và gộp.
+_Avoid_: Commit, revision, version, event
+
+**Conflict**:
+Tình trạng hai Change đồng thời đặt hai giá trị khác nhau cho cùng một key của một Config; Config vẫn đọc được, nhưng cần người chọn giá trị đúng.
+_Avoid_: Collision, divergence
