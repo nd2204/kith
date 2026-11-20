@@ -1,0 +1,576 @@
+
+===== A · start =====
+╭─ [1] Projects ───────────────────╮╭─ [0] Secrets · vet45-erp / dev ──────────────────────────────────────────────────╮
+│▸ vet45-erp  apps/erp/kith.yaml   ││ ⚠ 1 Conflict · run uses the newest value meanwhile · enter on the key to resolve │
+│  vet45-shared                    ││                                                                                  │
+│  mau-hien-app  apps/mau_hien/kit…││ KEY                  VALUE                              SOURCE                   │
+╰──────────────────────────────────╯│ APP_ENV              ••••••••                                                    │
+╭─ [2] Configs ────────────────────╮│ FLAVOR               ••••••••                                                    │
+│dev            ● ⚠1               ││ SENTRY_DSN           ••••••••                           ${vet45-shared.dev.SENTR…│
+│  ↳ dev_alice                     ││ STRIPE_KEY           ••••••••                            ⚠ Conflict              │
+│stg            ✖2                 ││ SUPABASE_ANON_KEY    ••••••••                                                    │
+│prd            ⟳                  ││ SUPABASE_URL         ••••••••                                                    │
+╰──────────────────────────────────╯│                                                                                  │
+╭─ [3] Commands ───────────────────╮│                                                                                  │
+│debug       Flutter run với flavo…││                                                                                  │
+│test                              ││                                                                                  │
+│gen:l10n    Sinh file l10n        ││                                                                                  │
+│deploy-ios  [stg prd]             ││                                                                                  │
+╰──────────────────────────────────╯│                                                                                  │
+╭─ [4] Machines ───────────────────╮│                                                                                  │
+│● alice-mbp      this machine     ││                                                                                  │
+│● alice-mini     1 behind         ││                                                                                  │
+│● bob-mbp        synced           ││                                                                                  │
+│○ carol-linux    offline 2d ago ·…││                                                                                  │
+│✖ bob-old-laptop revoked          ││                                                                                  │
+│? dan-thinkpad   join request     ││                                                                                  │
+│                                  │╰──────────────────────────────────────────────────────────────────────────────────╯
+│                                  │╭─ Log ────────────────────────────────────────────────────────────────────────────╮
+│                                  ││Sync    pulled 4 Changes from bob-mbp                                             │
+│                                  ││Conflict STRIPE_KEY on vet45-erp/dev: bob-mbp vs alice-mini (run uses bob-mbp's, …│
+│                                  ││Dropped 2 Changes from revoked bob-old-laptop on vet45-erp/stg                    │
+│                                  ││Project revoke bob-old-laptop (signed by alice) · vet45-erp/prd key rotation pend…│
+│                                  ││Join    dan-thinkpad requests to join vet45-erp · fingerprint age1t7…y2m          │
+╰──────────────────────────────────╯╰──────────────────────────────────────────────────────────────────────────────────╯
+ v/V reveal  e edit  a add  d unset  enter resolve Conflict  tab panel  1-4/0 jump  s sync  </> variant  q quit         
+ PROTOTYPE  ◀ <  A · Panels (lazygit)  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5            
+
+===== A · switcher: > goes to B =====
+ kith  projects ▸ vet45-erp ▸ dev                                                alice-mbp · peers 2/3 · synced 12s ago 
+ ⚠ 1 Conflict in vet45-erp/dev (:conflicts)                                                                             
+ ✖ 2 Changes dropped from bob-old-laptop on vet45-erp/stg (R in that Config)                                            
+ ⟳ vet45-erp/prd key rotation pending after revoking bob-old-laptop; 2 keys to rotate                                   
+   +1 more                                                                                                              
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ KEY                    VALUE                              SOURCE [6]                                                   
+ APP_ENV                ••••••••                                                                                        
+ FLAVOR                 ••••••••                                                                                        
+ SENTRY_DSN             ••••••••                           ${vet45-shared.dev.SENTRY_DSN}                               
+ STRIPE_KEY             ••••••••                            ⚠ Conflict                                                  
+ SUPABASE_ANON_KEY      ••••••••                                                                                        
+ SUPABASE_URL           ••••••••                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+ enter open  esc back  : jump  / filter  v reveal  s sync  e edit  a add  d unset  R re-apply dropped  </> variant      
+ PROTOTYPE  ◀ <  B · Drill-down (k9s)  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5            
+
+===== A · Conflict on STRIPE_KEY (j×3, enter) =====
+╭─ [1] Projects ───────────────────╮╭─ Resolve Conflict ───────────────────────────────────────────────────────────────╮
+│▸ vet45-erp  apps/erp/kith.yaml   ││ Conflict · STRIPE_KEY on vet45-erp/dev                                           │
+│  vet45-shared                    ││ Two concurrent Changes set different values. `run` currently uses the first one …│
+│  mau-hien-app  apps/mau_hien/kit…││                                                                                  │
+╰──────────────────────────────────╯│ ▸ sk_test_51Hq…a9         from bob-mbp      5m ago  (in use)                     │
+╭─ [2] Configs ────────────────────╮│   sk_test_77Zx…k2         from alice-mini   6m ago                               │
+│dev            ● ⚠1               ││   ✎ enter a new value…                                                           │
+│  ↳ dev_alice                     ││                                                                                  │
+│stg            ✖2                 ││ History                                                                          │
+│prd            ⟳                  ││   5m ago · bob-mbp · set                                                         │
+╰──────────────────────────────────╯│   5m ago · alice-mini · set                                                      │
+╭─ [3] Commands ───────────────────╮│   1mo ago · alice-mbp · set                                                      │
+│debug       Flutter run với flavo…││                                                                                  │
+│test                              ││                                                                                  │
+│gen:l10n    Sinh file l10n        ││                                                                                  │
+│deploy-ios  [stg prd]             ││                                                                                  │
+╰──────────────────────────────────╯│                                                                                  │
+╭─ [4] Machines ───────────────────╮│                                                                                  │
+│● alice-mbp      this machine     ││                                                                                  │
+│● alice-mini     1 behind         ││                                                                                  │
+│● bob-mbp        synced           ││                                                                                  │
+│○ carol-linux    offline 2d ago ·…││                                                                                  │
+│✖ bob-old-laptop revoked          ││                                                                                  │
+│? dan-thinkpad   join request     ││                                                                                  │
+│                                  │╰──────────────────────────────────────────────────────────────────────────────────╯
+│                                  │╭─ Log ────────────────────────────────────────────────────────────────────────────╮
+│                                  ││Sync    pulled 4 Changes from bob-mbp                                             │
+│                                  ││Conflict STRIPE_KEY on vet45-erp/dev: bob-mbp vs alice-mini (run uses bob-mbp's, …│
+│                                  ││Dropped 2 Changes from revoked bob-old-laptop on vet45-erp/stg                    │
+│                                  ││Project revoke bob-old-laptop (signed by alice) · vet45-erp/prd key rotation pend…│
+│                                  ││Join    dan-thinkpad requests to join vet45-erp · fingerprint age1t7…y2m          │
+╰──────────────────────────────────╯╰──────────────────────────────────────────────────────────────────────────────────╯
+ j/k choose  enter resolve (new Change pointing at both heads)  esc later                                               
+ PROTOTYPE  ◀ <  A · Panels (lazygit)  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5            
+
+===== A · Configs panel on stg (dropped Changes banner) =====
+╭─ [1] Projects ───────────────────╮╭─ [0] Secrets · vet45-erp / stg ──────────────────────────────────────────────────╮
+│▸ vet45-erp  apps/erp/kith.yaml   ││ ✖ dropped 2 Changes from revoked bob-old-laptop · R to re-apply them as yours    │
+│  vet45-shared                    ││ requires (kith.yaml) missing: STRIPE_KEY                                         │
+│  mau-hien-app  apps/mau_hien/kit…││                                                                                  │
+╰──────────────────────────────────╯│ KEY                  VALUE                              SOURCE                   │
+╭─ [2] Configs ────────────────────╮│ APP_ENV              ••••••••                                                    │
+│dev            ● ⚠1               ││ FLAVOR               ••••••••                                                    │
+│  ↳ dev_alice                     ││ SUPABASE_ANON_KEY    ••••••••                                                    │
+│stg            ✖2                 ││ SUPABASE_URL         ••••••••                                                    │
+│prd            ⟳                  ││                                                                                  │
+╰──────────────────────────────────╯│                                                                                  │
+╭─ [3] Commands ───────────────────╮│                                                                                  │
+│debug       Flutter run với flavo…││                                                                                  │
+│test                              ││                                                                                  │
+│gen:l10n    Sinh file l10n        ││                                                                                  │
+│deploy-ios  [stg prd]             ││                                                                                  │
+╰──────────────────────────────────╯│                                                                                  │
+╭─ [4] Machines ───────────────────╮│                                                                                  │
+│● alice-mbp      this machine     ││                                                                                  │
+│● alice-mini     1 behind         ││                                                                                  │
+│● bob-mbp        synced           ││                                                                                  │
+│○ carol-linux    offline 2d ago ·…││                                                                                  │
+│✖ bob-old-laptop revoked          ││                                                                                  │
+│? dan-thinkpad   join request     ││                                                                                  │
+│                                  │╰──────────────────────────────────────────────────────────────────────────────────╯
+│                                  │╭─ Log ────────────────────────────────────────────────────────────────────────────╮
+│                                  ││Sync    pulled 4 Changes from bob-mbp                                             │
+│                                  ││Conflict STRIPE_KEY on vet45-erp/dev: bob-mbp vs alice-mini (run uses bob-mbp's, …│
+│                                  ││Dropped 2 Changes from revoked bob-old-laptop on vet45-erp/stg                    │
+│                                  ││Project revoke bob-old-laptop (signed by alice) · vet45-erp/prd key rotation pend…│
+│                                  ││Join    dan-thinkpad requests to join vet45-erp · fingerprint age1t7…y2m          │
+╰──────────────────────────────────╯╰──────────────────────────────────────────────────────────────────────────────────╯
+ space kith use  enter open  R re-apply dropped  tab panel  1-4/0 jump  s sync  </> variant  q quit                     
+ PROTOTYPE  ◀ <  A · Panels (lazygit)  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5            
+
+===== A · Machines panel → grant matrix for bob-mbp =====
+╭─ [1] Projects ───────────────────╮╭─ Machine · Grants ───────────────────────────────────────────────────────────────╮
+│▸ vet45-erp  apps/erp/kith.yaml   ││ bob-mbp  age1m2…c4r  Member bob  tailnet 100.64.0.21                             │
+│  vet45-shared                    ││                                                                                  │
+│  mau-hien-app  apps/mau_hien/kit…││ PROJECT          CONFIG       GRANT                                              │
+╰──────────────────────────────────╯│ vet45-erp        dev          [x]                                                │
+╭─ [2] Configs ────────────────────╮│ vet45-erp        dev_alice    [ ]                                                │
+│dev            ● ⚠1               ││ vet45-erp        stg          [x]                                                │
+│  ↳ dev_alice                     ││ vet45-erp        prd          [ ] ⟳ rotation pending                             │
+│stg            ✖2                 ││ vet45-shared     dev          [x]                                                │
+│prd            ⟳                  ││ vet45-shared     prd          [x]                                                │
+╰──────────────────────────────────╯│ mau-hien-app     dev          [x]                                                │
+╭─ [3] Commands ───────────────────╮│ mau-hien-app     prd          [x]                                                │
+│debug       Flutter run với flavo…││                                                                                  │
+│test                              ││ enter to edit Grants                                                             │
+│gen:l10n    Sinh file l10n        ││                                                                                  │
+│deploy-ios  [stg prd]             ││                                                                                  │
+╰──────────────────────────────────╯│                                                                                  │
+╭─ [4] Machines ───────────────────╮│                                                                                  │
+│● alice-mbp      this machine     ││                                                                                  │
+│● alice-mini     1 behind         ││                                                                                  │
+│● bob-mbp        synced           ││                                                                                  │
+│○ carol-linux    offline 2d ago ·…││                                                                                  │
+│✖ bob-old-laptop revoked          ││                                                                                  │
+│? dan-thinkpad   join request     ││                                                                                  │
+│                                  │╰──────────────────────────────────────────────────────────────────────────────────╯
+│                                  │╭─ Log ────────────────────────────────────────────────────────────────────────────╮
+│                                  ││Sync    pulled 4 Changes from bob-mbp                                             │
+│                                  ││Conflict STRIPE_KEY on vet45-erp/dev: bob-mbp vs alice-mini (run uses bob-mbp's, …│
+│                                  ││Dropped 2 Changes from revoked bob-old-laptop on vet45-erp/stg                    │
+│                                  ││Project revoke bob-old-laptop (signed by alice) · vet45-erp/prd key rotation pend…│
+│                                  ││Join    dan-thinkpad requests to join vet45-erp · fingerprint age1t7…y2m          │
+╰──────────────────────────────────╯╰──────────────────────────────────────────────────────────────────────────────────╯
+ enter Grants  y approve join  tab panel  1-4/0 jump  s sync  </> variant  q quit                                       
+ PROTOTYPE  ◀ <  A · Panels (lazygit)  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5            
+
+===== A · Commands panel → run `debug` in an embedded session =====
+╭─ [1] Projects ───────────────────╮╭─ Sessions ───────────────────────────────────────────────────────────────────────╮
+│▸ vet45-erp  apps/erp/kith.yaml   ││ ● debug@dev                                                                      │
+│  vet45-shared                    ││                                                                                  │
+│  mau-hien-app  apps/mau_hien/kit…││$ kith run debug   # vet45-erp/dev, 6 keys injected + KITH_PROJECT/KITH_CONFIG/KI…│
+╰──────────────────────────────────╯│kith: warning: Conflict on STRIPE_KEY, using bob-mbp's value (resolve with `kith …│
+╭─ [2] Configs ────────────────────╮│+ flutter run --flavor "$FLAVOR" --dart-define-from-file=$KITH_ENV_FILE           │
+│dev            ● ⚠1               ││Launching lib/main.dart on iPhone 16 Pro in debug mode...                         │
+│  ↳ dev_alice                     ││Running Xcode build...                                                            │
+│stg            ✖2                 ││Xcode build done.                                            18.4s                │
+│prd            ⟳                  ││Syncing files to device iPhone 16 Pro...                                          │
+╰──────────────────────────────────╯│Flutter run key commands.                                                         │
+╭─ [3] Commands ───────────────────╮│r Hot reload. 🔥🔥🔥                                                              │
+│debug       Flutter run với flavo…││flutter: APP_ENV=development                                                      │
+│test                              ││                                                                                  │
+│gen:l10n    Sinh file l10n        ││                                                                                  │
+│deploy-ios  [stg prd]             ││                                                                                  │
+╰──────────────────────────────────╯│                                                                                  │
+╭─ [4] Machines ───────────────────╮│                                                                                  │
+│● alice-mbp      this machine     ││                                                                                  │
+│● alice-mini     1 behind         ││                                                                                  │
+│● bob-mbp        synced           ││                                                                                  │
+│○ carol-linux    offline 2d ago ·…││                                                                                  │
+│✖ bob-old-laptop revoked          ││                                                                                  │
+│? dan-thinkpad   join request     ││                                                                                  │
+│                                  │╰──────────────────────────────────────────────────────────────────────────────────╯
+│                                  │╭─ Log ────────────────────────────────────────────────────────────────────────────╮
+│                                  ││Sync    pulled 4 Changes from bob-mbp                                             │
+│                                  ││Conflict STRIPE_KEY on vet45-erp/dev: bob-mbp vs alice-mini (run uses bob-mbp's, …│
+│                                  ││Dropped 2 Changes from revoked bob-old-laptop on vet45-erp/stg                    │
+│                                  ││Project revoke bob-old-laptop (signed by alice) · vet45-erp/prd key rotation pend…│
+│                                  ││Join    dan-thinkpad requests to join vet45-erp · fingerprint age1t7…y2m          │
+╰──────────────────────────────────╯╰──────────────────────────────────────────────────────────────────────────────────╯
+ enter run with Active config  [ ] session  x close  tab panel  1-4/0 jump  s sync  </> variant  q quit                 
+ PROTOTYPE  ◀ <  A · Panels (lazygit)  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5            
+
+===== B · start (Setup of cwd: vet45-erp ▸ dev) =====
+ kith  projects ▸ vet45-erp ▸ dev                                                alice-mbp · peers 2/3 · synced 12s ago 
+ ⚠ 1 Conflict in vet45-erp/dev (:conflicts)                                                                             
+ ✖ 2 Changes dropped from bob-old-laptop on vet45-erp/stg (R in that Config)                                            
+ ⟳ vet45-erp/prd key rotation pending after revoking bob-old-laptop; 2 keys to rotate                                   
+   +1 more                                                                                                              
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ KEY                    VALUE                              SOURCE [6]                                                   
+ APP_ENV                ••••••••                                                                                        
+ FLAVOR                 ••••••••                                                                                        
+ SENTRY_DSN             ••••••••                           ${vet45-shared.dev.SENTRY_DSN}                               
+ STRIPE_KEY             ••••••••                            ⚠ Conflict                                                  
+ SUPABASE_ANON_KEY      ••••••••                                                                                        
+ SUPABASE_URL           ••••••••                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+ enter open  esc back  : jump  / filter  v reveal  s sync  e edit  a add  d unset  R re-apply dropped  </> variant      
+ PROTOTYPE  ◀ <  B · Drill-down (k9s)  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5            
+
+===== B · :machines =====
+ kith  projects ▸ machines                                                       alice-mbp · peers 2/3 · synced 12s ago 
+ ⚠ 1 Conflict in vet45-erp/dev (:conflicts)                                                                             
+ ✖ 2 Changes dropped from bob-old-laptop on vet45-erp/stg (R in that Config)                                            
+ ⟳ vet45-erp/prd key rotation pending after revoking bob-old-laptop; 2 keys to rotate                                   
+   +1 more                                                                                                              
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   MACHINE        MEMBER   FINGERPRINT  TAILNET        STATUS [6]                                                       
+ ● alice-mbp      alice    age1q8…7xk   100.64.0.11    this machine                                                     
+ ● alice-mini     alice    age1z3…p0d   100.64.0.12    1 behind                                                         
+ ● bob-mbp        bob      age1m2…c4r   100.64.0.21    synced                                                           
+ ○ carol-linux    carol    age1k9…e1a   100.64.0.31    offline 2d ago · 3 behind                                        
+ ✖ bob-old-laptop bob      age1h4…w8n   100.64.0.22    revoked                                                          
+ ? dan-thinkpad   dan      age1t7…y2m   100.64.0.41    join request                                                     
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+ enter open  esc back  : jump  / filter  v reveal  s sync  y approve join  </> variant                                  
+ PROTOTYPE  ◀ <  B · Drill-down (k9s)  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5            
+
+===== B · machine bob-mbp → Grants =====
+ kith  projects ▸ machines ▸ bob-mbp                                             alice-mbp · peers 2/3 · synced 12s ago 
+ ⚠ 1 Conflict in vet45-erp/dev (:conflicts)                                                                             
+ ✖ 2 Changes dropped from bob-old-laptop on vet45-erp/stg (R in that Config)                                            
+ ⟳ vet45-erp/prd key rotation pending after revoking bob-old-laptop; 2 keys to rotate                                   
+   +1 more                                                                                                              
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ PROJECT          CONFIG       GRANT   [8]                                                                              
+ vet45-erp        dev          [x]                                                                                      
+ vet45-erp        dev_alice    [ ]                                                                                      
+ vet45-erp        stg          [x]                                                                                      
+ vet45-erp        prd          [ ]    ⟳ rotation pending (bob-old-laptop)                                               
+ vet45-shared     dev          [x]                                                                                      
+ vet45-shared     prd          [x]                                                                                      
+ mau-hien-app     dev          [x]                                                                                      
+ mau-hien-app     prd          [x]                                                                                      
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+ enter open  space grant/revoke  esc back  </> variant                                                                  
+ PROTOTYPE  ◀ <  B · Drill-down (k9s)  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5            
+
+===== B · Conflict screen =====
+ kith  projects ▸ conflicts ▸ STRIPE_KEY                                         alice-mbp · peers 2/3 · synced 12s ago 
+ ⚠ 1 Conflict in vet45-erp/dev (:conflicts)                                                                             
+ ✖ 2 Changes dropped from bob-old-laptop on vet45-erp/stg (R in that Config)                                            
+ ⟳ vet45-erp/prd key rotation pending after revoking bob-old-laptop; 2 keys to rotate                                   
+   +1 more                                                                                                              
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ STRIPE_KEY  in vet45-erp/dev                                                                                           
+ value   ••••••••                                                                                                       
+ ⚠ Conflict · `run` uses bob-mbp's value until resolved                                                                 
+                                                                                                                        
+ CHOOSE THE VALUE THAT WINS [3]                                                                                         
+ sk_test_51Hq…a9          from bob-mbp      5m ago                                                                      
+ sk_test_77Zx…k2          from alice-mini   6m ago                                                                      
+ ✎ enter a new value…                                                                                                   
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+ enter open  esc back  : jump  / filter  v reveal  s sync  e edit  </> variant                                          
+ PROTOTYPE  ◀ <  B · Drill-down (k9s)  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5            
+
+===== B · Conflict → new value prompt =====
+ kith  projects ▸ conflicts                                                      alice-mbp · peers 2/3 · synced 12s ago 
+ ✖ 2 Changes dropped from bob-old-laptop on vet45-erp/stg (R in that Config)                                            
+ ⟳ vet45-erp/prd key rotation pending after revoking bob-old-laptop; 2 keys to rotate                                   
+ ? dan-thinkpad wants to join (:machines, y)                                                                            
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ PROJECT          CONFIG     KEY                  CANDIDATES [0]                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+ enter open  esc back  : jump  / filter  v reveal  s sync  </> variant                                                  
+ PROTOTYPE  ◀ <  B · Drill-down (k9s)  > ▶  local Changes 1 · Conflicts 0 · peers 2/3 · sync 12s ago · log 6            
+
+===== C · Secrets tab =====
+ vet45-erp  apps/erp/kith.yaml  (p: next Project)                                alice-mbp · peers 2/3 · synced 12s ago 
+ Active config  dev ⚠1 │ ↳dev_alice │ stg ✖2 │ prd ⟳    [ ] kith use                                                    
+▔ 1 Secrets ▔  2 Commands    3 Access    4 Activity (4)                                                                 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   APP_ENV                                      │ APP_ENV                                                               
+   FLAVOR                                       │                                                                       
+ $ SENTRY_DSN                                   │ value   ••••••••                                                      
+ ⚠ STRIPE_KEY                                   │ source  dev                                                           
+   SUPABASE_ANON_KEY                            │                                                                       
+   SUPABASE_URL                                 │ history                                                               
+                                                │   3d ago · bob-mbp · set                                              
+ ⚠ Conflict ⟳ rotate ↳ inherited                │                                                                       
+ ● override  $ reference                        │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+ 1-4/tab tab  [ ] Config  s sync  enter edit/resolve  v reveal  a add  d unset  </> variant  q quit                     
+ PROTOTYPE  ◀ <  C · Setup tabs  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5                  
+
+===== C · Secrets tab, STRIPE_KEY selected =====
+ vet45-erp  apps/erp/kith.yaml  (p: next Project)                                alice-mbp · peers 2/3 · synced 12s ago 
+ Active config  dev ⚠1 │ ↳dev_alice │ stg ✖2 │ prd ⟳    [ ] kith use                                                    
+▔ 1 Secrets ▔  2 Commands    3 Access    4 Activity (4)                                                                 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   APP_ENV                                      │ STRIPE_KEY                                                            
+   FLAVOR                                       │                                                                       
+ $ SENTRY_DSN                                   │ value   ••••••••                                                      
+ ⚠ STRIPE_KEY                                   │ source  dev                                                           
+   SUPABASE_ANON_KEY                            │                                                                       
+   SUPABASE_URL                                 │ ⚠ Conflict: two concurrent Changes. `run` uses the first until resolv…
+                                                │   sk_test_51Hq…a9        bob-mbp      5m ago                          
+ ⚠ Conflict ⟳ rotate ↳ inherited                │   sk_test_77Zx…k2        alice-mini   6m ago                          
+ ● override  $ reference                        │   ✎ new value…                                                        
+                                                │   enter to choose                                                     
+                                                │                                                                       
+                                                │ history                                                               
+                                                │   5m ago · bob-mbp · set                                              
+                                                │   5m ago · alice-mini · set                                           
+                                                │   1mo ago · alice-mbp · set                                           
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+                                                │                                                                       
+ 1-4/tab tab  [ ] Config  s sync  enter edit/resolve  v reveal  a add  d unset  </> variant  q quit                     
+ PROTOTYPE  ◀ <  C · Setup tabs  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5                  
+
+===== C · Commands tab =====
+ vet45-erp  apps/erp/kith.yaml  (p: next Project)                                alice-mbp · peers 2/3 · synced 12s ago 
+ Active config  dev ⚠1 │ ↳dev_alice │ stg ✖2 │ prd ⟳    [ ] kith use                                                    
+  1 Secrets  ▔ 2 Commands ▔  3 Access    4 Activity (4)                                                                 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ requires ✓SUPABASE_URL ✓SUPABASE_ANON_KEY ✓STRIPE_KEY                                                                  
+                                                                                                                        
+ debug        ready          flutter run --flavor "$FLAVOR" --dart-define-from-file=$KITH_ENV_FILE                      
+   Flutter run với flavor đang chọn                                                                                     
+ test         ready          flutter test                                                                               
+ gen:l10n     ready          flutter gen-l10n                                                                           
+ deploy-ios   only [stg prd] ./deploy-ios.sh                                                                            
+                                                                                                                        
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ debug@dev  ● running   (output pane · x closes · real kith would use a PTY)                                            
+ $ kith run debug   # vet45-erp/dev, 6 keys injected + KITH_PROJECT/KITH_CONFIG/KITH_ENVIRONMENT                        
+ kith: warning: Conflict on STRIPE_KEY, using bob-mbp's value (resolve with `kith secrets resolve STRIPE_KEY`)          
+ + flutter run --flavor "$FLAVOR" --dart-define-from-file=$KITH_ENV_FILE                                                
+ Launching lib/main.dart on iPhone 16 Pro in debug mode...                                                              
+ Running Xcode build...                                                                                                 
+ Xcode build done.                                            18.4s                                                     
+ Syncing files to device iPhone 16 Pro...                                                                               
+ Flutter run key commands.                                                                                              
+ r Hot reload. 🔥🔥🔥                                                                                                   
+ flutter: APP_ENV=development                                                                                           
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+ 1-4/tab tab  [ ] Config  s sync  enter run  x close output  </> variant  q quit                                        
+ PROTOTYPE  ◀ <  C · Setup tabs  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5                  
+
+===== C · Access tab =====
+ vet45-erp  apps/erp/kith.yaml  (p: next Project)                                alice-mbp · peers 2/3 · synced 12s ago 
+ Active config  dev ⚠1 │ ↳dev_alice │ stg ✖2 │ prd ⟳    [ ] kith use                                                    
+  1 Secrets    2 Commands  ▔ 3 Access ▔  4 Activity (4)                                                                 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ ? dan-thinkpad asks to join (Member dan, fingerprint age1t7…y2m, tailnet 100.64.0.41) · y approve                      
+                                                                                                                        
+ MEMBER   MACHINE          STATUS                 dev        dev_alice  stg        prd                                  
+ alice★   alice-mbp        this machine           ●          ●          ●          ●                                    
+          alice-mini       1 behind               ●          ●          ·          ·                                    
+ bob      bob-mbp          synced                 ●          ·          ●          ·                                    
+          bob-old-laptop   revoked                ✖          ✖          ✖          ✖                                    
+ carol    carol-linux      offline 2d ago · 3 be… ●          ·          ·          ·                                    
+                                                                                                                        
+ ● Grant (read+write, Config encrypted to that Machine)   · none   ✖ revoked   ★ Admin                                  
+ ⟳ prd: data key rotation pending after revoking bob-old-laptop (happens on next sync by a Machine holding prd)         
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+ 1-4/tab tab  [ ] Config  s sync  hjkl cell  space grant/revoke  y approve join  </> variant  q quit                    
+ PROTOTYPE  ◀ <  C · Setup tabs  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5                  
+
+===== C · Activity tab =====
+ vet45-erp  apps/erp/kith.yaml  (p: next Project)                                alice-mbp · peers 2/3 · synced 12s ago 
+ Active config  dev ⚠1 │ ↳dev_alice │ stg ✖2 │ prd ⟳    [ ] kith use                                                    
+  1 Secrets    2 Commands    3 Access  ▔ 4 Activity (4) ▔                                                               
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ Needs you                                                                                                              
+ ▸⚠ Conflict  vet45-erp/dev STRIPE_KEY · bob-mbp vs alice-mini                                                          
+  ✖ Dropped   2 Changes from revoked bob-old-laptop on vet45-erp/stg · enter re-applies them as yours                   
+  ⟳ Rotation  vet45-erp/prd data key waits for next sync (revoked bob-old-laptop) · rotate values: STRIPE_KEY, SUPABASE…
+  ? Join      dan-thinkpad (Member dan) fingerprint age1t7…y2m · enter approves                                         
+                                                                                                                        
+ Feed                                                                                                                   
+  Join    dan-thinkpad requests to join vet45-erp · fingerprint age1t7…y2m                                              
+  Project revoke bob-old-laptop (signed by alice) · vet45-erp/prd key rotation pending                                  
+  Dropped 2 Changes from revoked bob-old-laptop on vet45-erp/stg                                                        
+  Conflict STRIPE_KEY on vet45-erp/dev: bob-mbp vs alice-mini (run uses bob-mbp's, newer HLC)                           
+  Sync    pulled 4 Changes from bob-mbp                                                                                 
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+ 1-4/tab tab  [ ] Config  s sync  enter act on item  </> variant  q quit                                                
+ PROTOTYPE  ◀ <  C · Setup tabs  > ▶  local Changes 0 · Conflicts 1 · peers 2/3 · sync 12s ago · log 5                  
