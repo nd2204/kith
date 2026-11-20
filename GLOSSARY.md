@@ -51,3 +51,7 @@ _Avoid_: Commit, revision, version, event
 **Conflict**:
 Tình trạng hai Change đồng thời đặt hai giá trị khác nhau cho cùng một key của một Config; Config vẫn đọc được, nhưng cần người chọn giá trị đúng.
 _Avoid_: Collision, divergence
+
+**Active config**:
+Config mà một Machine đang dùng cho một Project khi lệnh không chỉ định Config khác; mặc định là Config ghi trong Setup.
+_Avoid_: Current config, selected profile
