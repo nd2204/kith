@@ -32,6 +32,10 @@ _Avoid_: Action, script, task
 Một máy tin cậy chạy kith, có cặp khóa riêng; là chủ thể được cấp quyền và là recipient của Config.
 _Avoid_: Device, node, peer
 
+**Recovery machine**:
+Machine có khóa được cất offline và không chạy kith thường xuyên, dùng để khôi phục quyền Admin hoặc giải mã bản sao lưu.
+_Avoid_: Cold machine, recovery key, backup key
+
 **Member**:
 Một người, dùng làm nhãn gom các Machine của họ; không có khóa riêng.
 _Avoid_: User, account
