@@ -1,0 +1,21 @@
+# Tương thích phiên bản bằng khung header cố định và Format floor do Admin nâng
+
+Các Machine của một Project chạy những bản kith khác nhau, và không có server nào ép chúng nâng cấp cùng lúc. Vì vậy header của Change có một **khung cố định suốt kith 1.x**: `format`, id Project, id Config, epoch, Machine tác giả và các hash cha. Sau khung là một vùng extension TLV. Nhờ khung cố định, máy cũ vẫn kiểm được hash, chữ ký và quyền nhân quả của mọi Change, kể cả Change ghi bằng bản mới hơn. Trường `format` là một số nguyên, chỉ báo cách mã hóa payload và nghĩa của các extension. Bản mới **không tự ghi `format` mới**. Nó ghi theo **Format floor** của Project, và chỉ Admin nâng được sàn này, bằng một Change có chữ ký trong log Project. Nhờ vậy, trong 1.x chỉ có một điểm cắt cứng giữa các phiên bản, và điểm đó là một quyết định có chủ đích.
+
+## Considered Options
+
+- **`format` đánh version cả header** (bản mới đổi khung tùy ý): bị loại, vì máy cũ không đọc được Machine tác giả, nên không kiểm được chữ ký hay quyền, và không còn chuyển tiếp Change một cách an toàn.
+- **Bản mới ghi format mới ngay**: bị loại, vì một máy nâng cấp là đủ làm mọi máy cũ trong Project đóng băng mà không ai quyết định điều đó.
+- **Tự nâng sàn khi mọi Machine báo đã hỗ trợ**: bị loại, vì máy offline lâu hay Recovery machine (hiếm khi chạy) sẽ chặn việc nâng sàn mãi mãi. Còn nếu bỏ qua các máy đó thì lại thành "ghi format mới ngay".
+- **Máy cũ bỏ qua đúng Change không đọc được, vẫn áp dụng các Change con cháu**: bị loại, vì trạng thái tính ra có thể sai.
+- **Máy cũ từ chối Change lạ, hoặc ngừng đồng bộ log đó**: bị loại, vì làm đứt đường nhân bản giữa các máy mới đi qua nó, và trái nguyên tắc local-first.
+
+## Consequences
+
+- **Change không đọc được** (`format` cao hơn mức máy đọc được, hoặc có extension lạ mang bit `critical`): máy vẫn lưu và nhân bản nó. Trạng thái được tính trên phần log khép kín nhân quả, bỏ Change đó *và mọi Change con cháu của nó*. Config đóng băng như lúc máy offline: cũ nhưng nhất quán, và `run` không bị chặn. Log Project xử lý giống vậy, nên máy cũ có thể chưa thấy một lệnh thu hồi mới. Điều này chấp nhận được, vì máy bị thu hồi không có data key của epoch mới; `kith doctor` vẫn cảnh báo đỏ. Extension lạ không có bit `critical` thì bị bỏ qua. Loại extension mới chỉ đi kèm một `format` mới.
+- **Nâng sàn** (`kith project upgrade`): sàn áp dụng cho log Project và mọi Config của Project. Sàn chỉ tăng; hai lần nâng đồng thời thì lấy giá trị lớn hơn. Machine của Admin phải ghi được format đó. Lệnh liệt kê các Machine chưa gỡ theo ba nhóm (sẵn sàng, chưa sẵn sàng, chưa từng thấy), dựa trên `hello` gần nhất, rồi bắt xác nhận chứ không chặn cứng. Loại Change nâng sàn có sẵn từ v1.0 để mọi bản đều hiểu nó.
+- Change có format thấp hơn sàn mà quá khứ nhân quả chứa lệnh nâng sàn thì bị loại, nhưng vẫn hiển thị để người dùng áp dụng lại bằng tay. Change đồng thời với lệnh nâng sàn vẫn hợp lệ. Bản kith thấy sàn cao hơn mức nó ghi được thì từ chối ghi vào Project đó và nhắc `kith self-update`; việc đọc và `run` vẫn chạy.
+- **Tiền tố chữ ký** `kith/change/v1` và `kith/project-change/v1` đánh version cho khung hash và chữ ký, không đi theo `format`. Chúng cố định suốt 1.x; đổi chúng là lên kith 2, và cần một kế hoạch chuyển log riêng.
+- **Giao thức đồng bộ**: major nằm trong ALPN (`kith/1`). Không có major chung thì TLS bắt tay thất bại, và `kith doctor` báo lỗi đích danh peer đó. Sau khi kết nối, endpoint `hello` trao version kith, dải minor giao thức và `format` cao nhất đọc được. Hai bên dùng minor chung cao nhất, và kết quả được lưu vào sổ địa chỉ mềm cục bộ. Minor chỉ được thêm (endpoint mới, trường tùy chọn); muốn bỏ hay đổi nghĩa một thứ thì phải lên `kith/2`.
+- **Chính sách hỗ trợ**: mọi bản 1.x đọc được mọi `format` cũ và nói chuyện được với nhau. Không có quy tắc kiểu "N-1 minor". Mục **Compatibility** trong release notes ghi minor giao thức mới, `format` mới, và việc có nên chạy `kith project upgrade` không.
+- **Định dạng khác**: kho cục bộ có số schema; bản mới tự migrate, bản cũ gặp schema mới hơn thì dựng lại cache, vì Change là file bất biến. File `backup export` và mã Invite có trường version; gặp version lạ thì từ chối kèm thông báo "cần kith ≥ vX". `kith.yaml` có `version: 1`: trường lạ chỉ cảnh báo, còn `version` lạ thì từ chối.
