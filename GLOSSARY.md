@@ -55,3 +55,11 @@ _Avoid_: Collision, divergence
 **Active config**:
 Config mà một Machine đang dùng cho một Project khi lệnh không chỉ định Config khác; mặc định là Config ghi trong Setup.
 _Avoid_: Current config, selected profile
+
+**Rollback**:
+Một Change đặt lại một key, hoặc cả Config, về giá trị chúng có tại một Change cũ hơn; lịch sử không bị xóa hay viết lại.
+_Avoid_: Revert, undo, restore
+
+**Archive**:
+Trạng thái của một Config hoặc Project đã ngừng dùng: không còn chạy hay ghi được, nhưng không mất gì và bật lại được.
+_Avoid_: Delete, remove
