@@ -11,7 +11,7 @@ Log Change của mỗi Config và log Project được giữ đầy đủ, mãi 
 
 ## Consequences
 
-- Mọi giá trị từng được `set` nằm vĩnh viễn trong lịch sử của Config, và đọc được bởi mọi Machine có Grant, hiện tại và tương lai. Tài liệu ghi rõ điều này. Lỡ ghi nhầm một secret thì cách xử lý duy nhất là xoay nó ở nguồn. `kith secrets flag <KEY>` (có `--all`) gắn cờ "cần xoay secret" bằng tay, còn `kith secrets unflag <KEY>` gỡ cờ. Cả hai là Change trong log Config. Cờ, dù gắn bằng tay hay tự sinh khi thu hồi hoặc gỡ Machine, hết khi có một `set` key đó nằm sau cờ theo quan hệ nhân quả.
+- Mọi giá trị từng được `set` nằm vĩnh viễn trong lịch sử của Config, và đọc được bởi mọi Machine có Grant, hiện tại và tương lai. Tài liệu ghi rõ điều này. Lỡ ghi nhầm một secret thì cách xử lý duy nhất là xoay nó ở nguồn. `kith secrets flag <KEY>` (có `--all`) gắn cờ "cần xoay secret" bằng tay, còn `kith secrets unflag <KEY>` gỡ cờ. Cả hai là Change trong log Config. Cờ, dù gắn bằng tay hay tự sinh khi thu hồi hoặc gỡ Machine, hết khi có một `set` key đó nằm sau cờ theo quan hệ nhân quả. Rollback và `reapply` không tính là `set` để gỡ cờ, và khi khôi phục một giá trị từng bị gắn cờ thì tự gắn lại cờ cho key đó.
 - `kith doctor` và TUI hiện số Change và dung lượng của từng log. `doctor` cảnh báo khi một log vượt 50.000 Change hoặc 50 MB; ngưỡng chỉnh được bằng cấu hình cục bộ. Đó là tín hiệu để xem lại quyết định này. Compaction sau này, nếu có, là một loại Change mới đi qua Format floor ([ADR 0008](./0008-tuong-thich-phien-ban-bang-khung-header-co-dinh-va-format-floor.md)), nên v1 không phải chừa trước trường nào.
 - **Archive**:
   - Chỉ Admin archive hay unarchive được.
