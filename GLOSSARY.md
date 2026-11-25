@@ -32,6 +32,10 @@ _Avoid_: Action, script, task
 File tạm chứa secret của một Config, do `run` tạo cho một lệnh khi được yêu cầu và xóa khi lệnh kết thúc; dành cho công cụ đọc secret từ file thay vì từ môi trường.
 _Avoid_: Env file, dotenv, temp file
 
+**Secret file**:
+File chứa giá trị của một key, được ghi ra đường dẫn mà Named command khai báo và chỉ tồn tại trong lúc lệnh đó chạy; dành cho công cụ cần secret ở một đường dẫn cố định.
+_Avoid_: Mount, keyfile, materialized file
+
 **Machine**:
 Một máy tin cậy chạy kith, có cặp khóa riêng; là chủ thể được cấp quyền và là recipient của Config.
 _Avoid_: Device, node, peer
