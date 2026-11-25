@@ -32,6 +32,10 @@ _Avoid_: Action, script, task
 Một máy tin cậy chạy kith, có cặp khóa riêng; là chủ thể được cấp quyền và là recipient của Config.
 _Avoid_: Device, node, peer
 
+**Agent**:
+Tiến trình nền của kith chạy trong phiên đăng nhập của user trên một Machine; là phần duy nhất của kith nhân bản Change với các Machine khác.
+_Avoid_: Daemon, service, server
+
 **Recovery machine**:
 Machine có khóa được cất offline và không chạy kith thường xuyên, dùng để khôi phục quyền Admin hoặc giải mã bản sao lưu.
 _Avoid_: Cold machine, recovery key, backup key
@@ -47,6 +51,10 @@ _Avoid_: Share, access, permission
 **Admin**:
 Vai trò của một Member trong một Project, cho phép ký các thay đổi về thành viên và Grant của Project đó.
 _Avoid_: Owner, manager
+
+**Invite**:
+Mã có thời hạn do Admin tạo, cho một máy mới tìm được Machine của Admin và gửi yêu cầu vào Project; tự nó không cấp quyền gì.
+_Avoid_: Token, invite link, join code
 
 **Change**:
 Một thay đổi có chữ ký của một Machine, hoặc trên các key của một Config, hoặc trên thành viên và Grant của một Project; là đơn vị được nhân bản và gộp.
